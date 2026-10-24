@@ -1,0 +1,15 @@
+global:
+  scrape_interval: 5s
+
+scrape_configs:
+  - job_name: app
+    # Ask Docker DNS for every container behind the name "app".
+    # New or removed containers are found automatically, which the scaling controller will rely on later.
+    dns_sd_configs:
+      - names: [app]
+        type: A
+        port: 8000
+        refresh_interval: 5s
+    # Our metrics already carry an "instance" label (the container ID).
+    # honor_labels keeps it instead of renaming it.
+    honor_labels: true
