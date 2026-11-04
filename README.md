@@ -1,6 +1,9 @@
+
 # Terraform AWS DevOps Platform
 
-A **local-first DevOps and platform engineering portfolio project**. A small FastAPI + PostgreSQL
+![CI](https://github.com/Divyadharshini02/terraform-aws-devops-platform/actions/workflows/ci.yml/badge.svg)
+
+A local-first DevOps and platform engineering portfolio project. A small FastAPI + PostgreSQL
 service runs behind NGINX on Docker Compose, is monitored with Prometheus and Grafana, is
 load-tested with k6, and is scaled automatically by a custom Python autoscaling controller.
 The same platform is designed for AWS as modular Terraform, which is **formatted, validated and
