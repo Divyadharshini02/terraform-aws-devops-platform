@@ -23,7 +23,8 @@ export default function () {
     const id = created.json('id');
     const got = http.get(`${BASE}/tasks/${id}`);
     check(got, { 'read is 200': (r) => r.status === 200 });
-    http.del(`${BASE}/tasks/${id}`);
+    const deleted = http.del(`${BASE}/tasks/${id}`);
+    check(deleted, { 'delete is 204': (r) => r.status === 204 });
   }
   sleep(0.2); // keeps the load laptop-friendly
 }
