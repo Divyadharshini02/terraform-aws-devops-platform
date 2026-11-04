@@ -8,3 +8,21 @@ __pycache__/
 *.tfvars
 !*.tfvars.example
 *.db
+# Terraform (M8)
+crash.log
+crash.*.log
+*.tfplan
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
+.terraformrc
+terraform.rc
+# Secrets and keys (pre-GitHub hardening)
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+*.pfx
+id_rsa*

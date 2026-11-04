@@ -1,0 +1,756 @@
+terraform scan results:
+
+Passed checks: 174, Failed checks: 0, Skipped checks: 20
+
+Check: CKV_AWS_41: "Ensure no hard coded AWS access key and secret key exists in provider"
+	PASSED for resource: aws.default
+	File: /environments/dev/providers.tf:4-10
+Check: CKV_AWS_91: "Ensure the ELBv2 (Application/Network) has access logging enabled"
+	PASSED for resource: module.compute.aws_lb.this
+	File: /modules/compute/main.tf:14-31
+	Calling File: /environments/dev/main.tf:41-67
+Check: CKV_AWS_131: "Ensure that ALB drops HTTP headers"
+	PASSED for resource: module.compute.aws_lb.this
+	File: /modules/compute/main.tf:14-31
+	Calling File: /environments/dev/main.tf:41-67
+Check: CKV_AWS_328: "Ensure that ALB is configured with defensive or strictest desync mitigation mode"
+	PASSED for resource: module.compute.aws_lb.this
+	File: /modules/compute/main.tf:14-31
+	Calling File: /environments/dev/main.tf:41-67
+Check: CKV_AWS_261: "Ensure HTTP HTTPS Target group defines Healthcheck"
+	PASSED for resource: module.compute.aws_lb_target_group.app
+	File: /modules/compute/main.tf:33-54
+	Calling File: /environments/dev/main.tf:41-67
+Check: CKV_AWS_2: "Ensure ALB protocol is HTTPS"
+	PASSED for resource: module.compute.aws_lb_listener.https[0]
+	File: /modules/compute/main.tf:88-103
+	Calling File: /environments/dev/main.tf:41-67
+Check: CKV_AWS_341: "Ensure Launch template should not have a metadata response hop limit greater than 1"
+	PASSED for resource: module.compute.aws_launch_template.app
+	File: /modules/compute/main.tf:107-163
+	Calling File: /environments/dev/main.tf:41-67
+Check: CKV_AWS_88: "EC2 instance should not have public IP."
+	PASSED for resource: module.compute.aws_launch_template.app
+	File: /modules/compute/main.tf:107-163
+	Calling File: /environments/dev/main.tf:41-67
+Check: CKV_AWS_46: "Ensure no hard-coded secrets exist in EC2 user data"
+	PASSED for resource: module.compute.aws_launch_template.app
+	File: /modules/compute/main.tf:107-163
+	Calling File: /environments/dev/main.tf:41-67
+Check: CKV_AWS_79: "Ensure Instance Metadata Service Version 1 is not enabled"
+	PASSED for resource: module.compute.aws_launch_template.app
+	File: /modules/compute/main.tf:107-163
+	Calling File: /environments/dev/main.tf:41-67
+Check: CKV_AWS_153: "Autoscaling groups should supply tags to launch configurations"
+	PASSED for resource: module.compute.aws_autoscaling_group.app
+	File: /modules/compute/main.tf:165-202
+	Calling File: /environments/dev/main.tf:41-67
+Check: CKV_AWS_315: "Ensure EC2 Auto Scaling groups use EC2 launch templates"
+	PASSED for resource: module.compute.aws_autoscaling_group.app
+	File: /modules/compute/main.tf:165-202
+	Calling File: /environments/dev/main.tf:41-67
+Check: CKV_AWS_16: "Ensure all data stored in the RDS is securely encrypted at rest"
+	PASSED for resource: module.database.aws_db_instance.this
+	File: /modules/database/main.tf:36-73
+	Calling File: /environments/dev/main.tf:69-78
+Check: CKV_AWS_161: "Ensure RDS database has IAM authentication enabled"
+	PASSED for resource: module.database.aws_db_instance.this
+	File: /modules/database/main.tf:36-73
+	Calling File: /environments/dev/main.tf:69-78
+Check: CKV_AWS_133: "Ensure that RDS instances has backup policy"
+	PASSED for resource: module.database.aws_db_instance.this
+	File: /modules/database/main.tf:36-73
+	Calling File: /environments/dev/main.tf:69-78
+Check: CKV_AWS_211: "Ensure RDS uses a modern CaCert"
+	PASSED for resource: module.database.aws_db_instance.this
+	File: /modules/database/main.tf:36-73
+	Calling File: /environments/dev/main.tf:69-78
+Check: CKV_AWS_226: "Ensure DB instance gets all minor upgrades automatically"
+	PASSED for resource: module.database.aws_db_instance.this
+	File: /modules/database/main.tf:36-73
+	Calling File: /environments/dev/main.tf:69-78
+Check: CKV_AWS_354: "Ensure RDS Performance Insights are encrypted using KMS CMKs"
+	PASSED for resource: module.database.aws_db_instance.this
+	File: /modules/database/main.tf:36-73
+	Calling File: /environments/dev/main.tf:69-78
+Check: CKV_AWS_388: "Ensure AWS Aurora PostgreSQL is not exposed to local file read vulnerability"
+	PASSED for resource: module.database.aws_db_instance.this
+	File: /modules/database/main.tf:36-73
+	Calling File: /environments/dev/main.tf:69-78
+Check: CKV_AWS_129: "Ensure that respective logs of Amazon Relational Database Service (Amazon RDS) are enabled"
+	PASSED for resource: module.database.aws_db_instance.this
+	File: /modules/database/main.tf:36-73
+	Calling File: /environments/dev/main.tf:69-78
+Check: CKV_AWS_17: "Ensure all data stored in RDS is not publicly accessible"
+	PASSED for resource: module.database.aws_db_instance.this
+	File: /modules/database/main.tf:36-73
+	Calling File: /environments/dev/main.tf:69-78
+Check: CKV_AWS_293: "Ensure that AWS database instances have deletion protection enabled"
+	PASSED for resource: module.database.aws_db_instance.this
+	File: /modules/database/main.tf:36-73
+	Calling File: /environments/dev/main.tf:69-78
+Check: CKV_AWS_93: "Ensure S3 bucket policy does not lockout all but root user. (Prevent lockouts needing root account fixes)"
+	PASSED for resource: module.monitoring.aws_s3_bucket.alb_logs
+	File: /modules/monitoring/main.tf:13-23
+	Calling File: /environments/dev/main.tf:83-92
+Check: CKV_AWS_54: "Ensure S3 bucket has block public policy enabled"
+	PASSED for resource: module.monitoring.aws_s3_bucket_public_access_block.alb_logs
+	File: /modules/monitoring/main.tf:25-32
+	Calling File: /environments/dev/main.tf:83-92
+Check: CKV_AWS_56: "Ensure S3 bucket has 'restrict_public_buckets' enabled"
+	PASSED for resource: module.monitoring.aws_s3_bucket_public_access_block.alb_logs
+	File: /modules/monitoring/main.tf:25-32
+	Calling File: /environments/dev/main.tf:83-92
+Check: CKV_AWS_53: "Ensure S3 bucket has block public ACLS enabled"
+	PASSED for resource: module.monitoring.aws_s3_bucket_public_access_block.alb_logs
+	File: /modules/monitoring/main.tf:25-32
+	Calling File: /environments/dev/main.tf:83-92
+Check: CKV_AWS_55: "Ensure S3 bucket has ignore public ACLs enabled"
+	PASSED for resource: module.monitoring.aws_s3_bucket_public_access_block.alb_logs
+	File: /modules/monitoring/main.tf:25-32
+	Calling File: /environments/dev/main.tf:83-92
+Check: CKV_AWS_300: "Ensure S3 lifecycle configuration sets period for aborting failed uploads"
+	PASSED for resource: module.monitoring.aws_s3_bucket_lifecycle_configuration.alb_logs
+	File: /modules/monitoring/main.tf:61-82
+	Calling File: /environments/dev/main.tf:83-92
+Check: CKV_AWS_93: "Ensure S3 bucket policy does not lockout all but root user. (Prevent lockouts needing root account fixes)"
+	PASSED for resource: module.monitoring.aws_s3_bucket_policy.alb_logs
+	File: /modules/monitoring/main.tf:129-134
+	Calling File: /environments/dev/main.tf:83-92
+Check: CKV_AWS_66: "Ensure that CloudWatch Log Group specifies retention days"
+	PASSED for resource: module.monitoring.aws_cloudwatch_log_group.app
+	File: /modules/monitoring/main.tf:138-144
+	Calling File: /environments/dev/main.tf:83-92
+Check: CKV_AWS_26: "Ensure all data stored in the SNS topic is encrypted"
+	PASSED for resource: module.monitoring.aws_sns_topic.alarms
+	File: /modules/monitoring/main.tf:148-153
+	Calling File: /environments/dev/main.tf:83-92
+Check: CKV_AWS_319: "Ensure that CloudWatch alarm actions are enabled"
+	PASSED for resource: module.monitoring.aws_cloudwatch_metric_alarm.this
+	File: /modules/monitoring/main.tf:273-292
+	Calling File: /environments/dev/main.tf:83-92
+Check: CKV_AWS_49: "Ensure no IAM policies documents allow "*" as a statement's actions"
+	PASSED for resource: module.monitoring.aws_iam_policy_document.alb_logs
+	File: /modules/monitoring/main.tf:84-127
+	Calling File: /environments/dev/main.tf:83-92
+Check: CKV_AWS_358: "Ensure AWS GitHub Actions OIDC authorization policies only allow safe claims and claim order"
+	PASSED for resource: module.monitoring.aws_iam_policy_document.alb_logs
+	File: /modules/monitoring/main.tf:84-127
+	Calling File: /environments/dev/main.tf:83-92
+Check: CKV_AWS_111: "Ensure IAM policies does not allow write access without constraints"
+	PASSED for resource: module.monitoring.aws_iam_policy_document.alb_logs
+	File: /modules/monitoring/main.tf:84-127
+	Calling File: /environments/dev/main.tf:83-92
+Check: CKV_AWS_356: "Ensure no IAM policies documents allow "*" as a statement's resource for restrictable actions"
+	PASSED for resource: module.monitoring.aws_iam_policy_document.alb_logs
+	File: /modules/monitoring/main.tf:84-127
+	Calling File: /environments/dev/main.tf:83-92
+Check: CKV_AWS_283: "Ensure no IAM policies documents allow ALL or any AWS principal permissions to the resource"
+	PASSED for resource: module.monitoring.aws_iam_policy_document.alb_logs
+	File: /modules/monitoring/main.tf:84-127
+	Calling File: /environments/dev/main.tf:83-92
+Check: CKV_AWS_109: "Ensure IAM policies does not allow permissions management / resource exposure without constraints"
+	PASSED for resource: module.monitoring.aws_iam_policy_document.alb_logs
+	File: /modules/monitoring/main.tf:84-127
+	Calling File: /environments/dev/main.tf:83-92
+Check: CKV_AWS_1: "Ensure IAM policies that allow full "*-*" administrative privileges are not created"
+	PASSED for resource: module.monitoring.aws_iam_policy_document.alb_logs
+	File: /modules/monitoring/main.tf:84-127
+	Calling File: /environments/dev/main.tf:83-92
+Check: CKV_AWS_108: "Ensure IAM policies does not allow data exfiltration"
+	PASSED for resource: module.monitoring.aws_iam_policy_document.alb_logs
+	File: /modules/monitoring/main.tf:84-127
+	Calling File: /environments/dev/main.tf:83-92
+Check: CKV_AWS_110: "Ensure IAM policies does not allow privilege escalation"
+	PASSED for resource: module.monitoring.aws_iam_policy_document.alb_logs
+	File: /modules/monitoring/main.tf:84-127
+	Calling File: /environments/dev/main.tf:83-92
+Check: CKV_AWS_107: "Ensure IAM policies does not allow credentials exposure"
+	PASSED for resource: module.monitoring.aws_iam_policy_document.alb_logs
+	File: /modules/monitoring/main.tf:84-127
+	Calling File: /environments/dev/main.tf:83-92
+Check: CKV_AWS_49: "Ensure no IAM policies documents allow "*" as a statement's actions"
+	PASSED for resource: module.monitoring.aws_iam_policy_document.alarms_topic
+	File: /modules/monitoring/main.tf:155-172
+	Calling File: /environments/dev/main.tf:83-92
+Check: CKV_AWS_358: "Ensure AWS GitHub Actions OIDC authorization policies only allow safe claims and claim order"
+	PASSED for resource: module.monitoring.aws_iam_policy_document.alarms_topic
+	File: /modules/monitoring/main.tf:155-172
+	Calling File: /environments/dev/main.tf:83-92
+Check: CKV_AWS_111: "Ensure IAM policies does not allow write access without constraints"
+	PASSED for resource: module.monitoring.aws_iam_policy_document.alarms_topic
+	File: /modules/monitoring/main.tf:155-172
+	Calling File: /environments/dev/main.tf:83-92
+Check: CKV_AWS_356: "Ensure no IAM policies documents allow "*" as a statement's resource for restrictable actions"
+	PASSED for resource: module.monitoring.aws_iam_policy_document.alarms_topic
+	File: /modules/monitoring/main.tf:155-172
+	Calling File: /environments/dev/main.tf:83-92
+Check: CKV_AWS_283: "Ensure no IAM policies documents allow ALL or any AWS principal permissions to the resource"
+	PASSED for resource: module.monitoring.aws_iam_policy_document.alarms_topic
+	File: /modules/monitoring/main.tf:155-172
+	Calling File: /environments/dev/main.tf:83-92
+Check: CKV_AWS_109: "Ensure IAM policies does not allow permissions management / resource exposure without constraints"
+	PASSED for resource: module.monitoring.aws_iam_policy_document.alarms_topic
+	File: /modules/monitoring/main.tf:155-172
+	Calling File: /environments/dev/main.tf:83-92
+Check: CKV_AWS_1: "Ensure IAM policies that allow full "*-*" administrative privileges are not created"
+	PASSED for resource: module.monitoring.aws_iam_policy_document.alarms_topic
+	File: /modules/monitoring/main.tf:155-172
+	Calling File: /environments/dev/main.tf:83-92
+Check: CKV_AWS_108: "Ensure IAM policies does not allow data exfiltration"
+	PASSED for resource: module.monitoring.aws_iam_policy_document.alarms_topic
+	File: /modules/monitoring/main.tf:155-172
+	Calling File: /environments/dev/main.tf:83-92
+Check: CKV_AWS_110: "Ensure IAM policies does not allow privilege escalation"
+	PASSED for resource: module.monitoring.aws_iam_policy_document.alarms_topic
+	File: /modules/monitoring/main.tf:155-172
+	Calling File: /environments/dev/main.tf:83-92
+Check: CKV_AWS_107: "Ensure IAM policies does not allow credentials exposure"
+	PASSED for resource: module.monitoring.aws_iam_policy_document.alarms_topic
+	File: /modules/monitoring/main.tf:155-172
+	Calling File: /environments/dev/main.tf:83-92
+Check: CKV_AWS_130: "Ensure VPC subnets do not assign public IP by default"
+	PASSED for resource: module.networking.aws_subnet.public[0]
+	File: /modules/networking/main.tf:38-47
+	Calling File: /environments/dev/main.tf:22-30
+Check: CKV_AWS_130: "Ensure VPC subnets do not assign public IP by default"
+	PASSED for resource: module.networking.aws_subnet.private[0]
+	File: /modules/networking/main.tf:50-59
+	Calling File: /environments/dev/main.tf:22-30
+Check: CKV_AWS_66: "Ensure that CloudWatch Log Group specifies retention days"
+	PASSED for resource: module.networking.aws_cloudwatch_log_group.flow_logs
+	File: /modules/networking/main.tf:123-130
+	Calling File: /environments/dev/main.tf:22-30
+Check: CKV_AWS_393: "Ensure AWS GitHub Actions OIDC authorization policies only allow safe claims and claim order on IAM role"
+	PASSED for resource: module.networking.aws_iam_role.flow_logs
+	File: /modules/networking/main.tf:150-155
+	Calling File: /environments/dev/main.tf:22-30
+Check: CKV_AWS_61: "Ensure AWS IAM policy does not allow assume role permission across all services"
+	PASSED for resource: module.networking.aws_iam_role.flow_logs
+	File: /modules/networking/main.tf:150-155
+	Calling File: /environments/dev/main.tf:22-30
+Check: CKV_AWS_274: "Disallow IAM roles, users, and groups from using the AWS AdministratorAccess policy"
+	PASSED for resource: module.networking.aws_iam_role.flow_logs
+	File: /modules/networking/main.tf:150-155
+	Calling File: /environments/dev/main.tf:22-30
+Check: CKV_AWS_60: "Ensure IAM role allows only specific services or principals to assume it"
+	PASSED for resource: module.networking.aws_iam_role.flow_logs
+	File: /modules/networking/main.tf:150-155
+	Calling File: /environments/dev/main.tf:22-30
+Check: CKV_AWS_62: "Ensure IAM policies that allow full "*-*" administrative privileges are not created"
+	PASSED for resource: module.networking.aws_iam_role_policy.flow_logs
+	File: /modules/networking/main.tf:169-173
+	Calling File: /environments/dev/main.tf:22-30
+Check: CKV_AWS_63: "Ensure no IAM policies documents allow "*" as a statement's actions"
+	PASSED for resource: module.networking.aws_iam_role_policy.flow_logs
+	File: /modules/networking/main.tf:169-173
+	Calling File: /environments/dev/main.tf:22-30
+Check: CKV_AWS_130: "Ensure VPC subnets do not assign public IP by default"
+	PASSED for resource: module.networking.aws_subnet.public[1]
+	File: /modules/networking/main.tf:38-47
+	Calling File: /environments/dev/main.tf:22-30
+Check: CKV_AWS_130: "Ensure VPC subnets do not assign public IP by default"
+	PASSED for resource: module.networking.aws_subnet.private[1]
+	File: /modules/networking/main.tf:50-59
+	Calling File: /environments/dev/main.tf:22-30
+Check: CKV_AWS_49: "Ensure no IAM policies documents allow "*" as a statement's actions"
+	PASSED for resource: module.networking.aws_iam_policy_document.flow_logs_assume
+	File: /modules/networking/main.tf:132-148
+	Calling File: /environments/dev/main.tf:22-30
+Check: CKV_AWS_358: "Ensure AWS GitHub Actions OIDC authorization policies only allow safe claims and claim order"
+	PASSED for resource: module.networking.aws_iam_policy_document.flow_logs_assume
+	File: /modules/networking/main.tf:132-148
+	Calling File: /environments/dev/main.tf:22-30
+Check: CKV_AWS_111: "Ensure IAM policies does not allow write access without constraints"
+	PASSED for resource: module.networking.aws_iam_policy_document.flow_logs_assume
+	File: /modules/networking/main.tf:132-148
+	Calling File: /environments/dev/main.tf:22-30
+Check: CKV_AWS_356: "Ensure no IAM policies documents allow "*" as a statement's resource for restrictable actions"
+	PASSED for resource: module.networking.aws_iam_policy_document.flow_logs_assume
+	File: /modules/networking/main.tf:132-148
+	Calling File: /environments/dev/main.tf:22-30
+Check: CKV_AWS_283: "Ensure no IAM policies documents allow ALL or any AWS principal permissions to the resource"
+	PASSED for resource: module.networking.aws_iam_policy_document.flow_logs_assume
+	File: /modules/networking/main.tf:132-148
+	Calling File: /environments/dev/main.tf:22-30
+Check: CKV_AWS_109: "Ensure IAM policies does not allow permissions management / resource exposure without constraints"
+	PASSED for resource: module.networking.aws_iam_policy_document.flow_logs_assume
+	File: /modules/networking/main.tf:132-148
+	Calling File: /environments/dev/main.tf:22-30
+Check: CKV_AWS_1: "Ensure IAM policies that allow full "*-*" administrative privileges are not created"
+	PASSED for resource: module.networking.aws_iam_policy_document.flow_logs_assume
+	File: /modules/networking/main.tf:132-148
+	Calling File: /environments/dev/main.tf:22-30
+Check: CKV_AWS_108: "Ensure IAM policies does not allow data exfiltration"
+	PASSED for resource: module.networking.aws_iam_policy_document.flow_logs_assume
+	File: /modules/networking/main.tf:132-148
+	Calling File: /environments/dev/main.tf:22-30
+Check: CKV_AWS_110: "Ensure IAM policies does not allow privilege escalation"
+	PASSED for resource: module.networking.aws_iam_policy_document.flow_logs_assume
+	File: /modules/networking/main.tf:132-148
+	Calling File: /environments/dev/main.tf:22-30
+Check: CKV_AWS_107: "Ensure IAM policies does not allow credentials exposure"
+	PASSED for resource: module.networking.aws_iam_policy_document.flow_logs_assume
+	File: /modules/networking/main.tf:132-148
+	Calling File: /environments/dev/main.tf:22-30
+Check: CKV_AWS_49: "Ensure no IAM policies documents allow "*" as a statement's actions"
+	PASSED for resource: module.networking.aws_iam_policy_document.flow_logs_write
+	File: /modules/networking/main.tf:158-167
+	Calling File: /environments/dev/main.tf:22-30
+Check: CKV_AWS_358: "Ensure AWS GitHub Actions OIDC authorization policies only allow safe claims and claim order"
+	PASSED for resource: module.networking.aws_iam_policy_document.flow_logs_write
+	File: /modules/networking/main.tf:158-167
+	Calling File: /environments/dev/main.tf:22-30
+Check: CKV_AWS_111: "Ensure IAM policies does not allow write access without constraints"
+	PASSED for resource: module.networking.aws_iam_policy_document.flow_logs_write
+	File: /modules/networking/main.tf:158-167
+	Calling File: /environments/dev/main.tf:22-30
+Check: CKV_AWS_356: "Ensure no IAM policies documents allow "*" as a statement's resource for restrictable actions"
+	PASSED for resource: module.networking.aws_iam_policy_document.flow_logs_write
+	File: /modules/networking/main.tf:158-167
+	Calling File: /environments/dev/main.tf:22-30
+Check: CKV_AWS_283: "Ensure no IAM policies documents allow ALL or any AWS principal permissions to the resource"
+	PASSED for resource: module.networking.aws_iam_policy_document.flow_logs_write
+	File: /modules/networking/main.tf:158-167
+	Calling File: /environments/dev/main.tf:22-30
+Check: CKV_AWS_109: "Ensure IAM policies does not allow permissions management / resource exposure without constraints"
+	PASSED for resource: module.networking.aws_iam_policy_document.flow_logs_write
+	File: /modules/networking/main.tf:158-167
+	Calling File: /environments/dev/main.tf:22-30
+Check: CKV_AWS_1: "Ensure IAM policies that allow full "*-*" administrative privileges are not created"
+	PASSED for resource: module.networking.aws_iam_policy_document.flow_logs_write
+	File: /modules/networking/main.tf:158-167
+	Calling File: /environments/dev/main.tf:22-30
+Check: CKV_AWS_108: "Ensure IAM policies does not allow data exfiltration"
+	PASSED for resource: module.networking.aws_iam_policy_document.flow_logs_write
+	File: /modules/networking/main.tf:158-167
+	Calling File: /environments/dev/main.tf:22-30
+Check: CKV_AWS_110: "Ensure IAM policies does not allow privilege escalation"
+	PASSED for resource: module.networking.aws_iam_policy_document.flow_logs_write
+	File: /modules/networking/main.tf:158-167
+	Calling File: /environments/dev/main.tf:22-30
+Check: CKV_AWS_107: "Ensure IAM policies does not allow credentials exposure"
+	PASSED for resource: module.networking.aws_iam_policy_document.flow_logs_write
+	File: /modules/networking/main.tf:158-167
+	Calling File: /environments/dev/main.tf:22-30
+Check: CKV_AWS_24: "Ensure no security groups allow ingress from 0.0.0.0:0 to port 22"
+	PASSED for resource: module.security.aws_security_group.alb
+	File: /modules/security/main.tf:10-21
+	Calling File: /environments/dev/main.tf:32-39
+Check: CKV_AWS_25: "Ensure no security groups allow ingress from 0.0.0.0:0 to port 3389"
+	PASSED for resource: module.security.aws_security_group.alb
+	File: /modules/security/main.tf:10-21
+	Calling File: /environments/dev/main.tf:32-39
+Check: CKV_AWS_23: "Ensure every security group and rule has a description"
+	PASSED for resource: module.security.aws_security_group.alb
+	File: /modules/security/main.tf:10-21
+	Calling File: /environments/dev/main.tf:32-39
+Check: CKV_AWS_260: "Ensure no security groups allow ingress from 0.0.0.0:0 to port 80"
+	PASSED for resource: module.security.aws_security_group.alb
+	File: /modules/security/main.tf:10-21
+	Calling File: /environments/dev/main.tf:32-39
+Check: CKV_AWS_277: "Ensure no security groups allow ingress from 0.0.0.0:0 to port -1"
+	PASSED for resource: module.security.aws_security_group.alb
+	File: /modules/security/main.tf:10-21
+	Calling File: /environments/dev/main.tf:32-39
+Check: CKV_AWS_382: "Ensure no security groups allow egress from 0.0.0.0:0 to port -1"
+	PASSED for resource: module.security.aws_security_group.alb
+	File: /modules/security/main.tf:10-21
+	Calling File: /environments/dev/main.tf:32-39
+Check: CKV_AWS_24: "Ensure no security groups allow ingress from 0.0.0.0:0 to port 22"
+	PASSED for resource: module.security.aws_vpc_security_group_ingress_rule.alb_http["0.0.0.0/0"]
+	File: /modules/security/main.tf:23-33
+	Calling File: /environments/dev/main.tf:32-39
+Check: CKV_AWS_25: "Ensure no security groups allow ingress from 0.0.0.0:0 to port 3389"
+	PASSED for resource: module.security.aws_vpc_security_group_ingress_rule.alb_http["0.0.0.0/0"]
+	File: /modules/security/main.tf:23-33
+	Calling File: /environments/dev/main.tf:32-39
+Check: CKV_AWS_23: "Ensure every security group and rule has a description"
+	PASSED for resource: module.security.aws_vpc_security_group_ingress_rule.alb_http["0.0.0.0/0"]
+	File: /modules/security/main.tf:23-33
+	Calling File: /environments/dev/main.tf:32-39
+Check: CKV_AWS_277: "Ensure no security groups allow ingress from 0.0.0.0:0 to port -1"
+	PASSED for resource: module.security.aws_vpc_security_group_ingress_rule.alb_http["0.0.0.0/0"]
+	File: /modules/security/main.tf:23-33
+	Calling File: /environments/dev/main.tf:32-39
+Check: CKV_AWS_24: "Ensure no security groups allow ingress from 0.0.0.0:0 to port 22"
+	PASSED for resource: module.security.aws_vpc_security_group_ingress_rule.alb_https
+	File: /modules/security/main.tf:35-44
+	Calling File: /environments/dev/main.tf:32-39
+Check: CKV_AWS_25: "Ensure no security groups allow ingress from 0.0.0.0:0 to port 3389"
+	PASSED for resource: module.security.aws_vpc_security_group_ingress_rule.alb_https
+	File: /modules/security/main.tf:35-44
+	Calling File: /environments/dev/main.tf:32-39
+Check: CKV_AWS_23: "Ensure every security group and rule has a description"
+	PASSED for resource: module.security.aws_vpc_security_group_ingress_rule.alb_https
+	File: /modules/security/main.tf:35-44
+	Calling File: /environments/dev/main.tf:32-39
+Check: CKV_AWS_260: "Ensure no security groups allow ingress from 0.0.0.0:0 to port 80"
+	PASSED for resource: module.security.aws_vpc_security_group_ingress_rule.alb_https
+	File: /modules/security/main.tf:35-44
+	Calling File: /environments/dev/main.tf:32-39
+Check: CKV_AWS_277: "Ensure no security groups allow ingress from 0.0.0.0:0 to port -1"
+	PASSED for resource: module.security.aws_vpc_security_group_ingress_rule.alb_https
+	File: /modules/security/main.tf:35-44
+	Calling File: /environments/dev/main.tf:32-39
+Check: CKV_AWS_23: "Ensure every security group and rule has a description"
+	PASSED for resource: module.security.aws_vpc_security_group_egress_rule.alb_to_app
+	File: /modules/security/main.tf:46-53
+	Calling File: /environments/dev/main.tf:32-39
+Check: CKV_AWS_382: "Ensure no security groups allow egress from 0.0.0.0:0 to port -1"
+	PASSED for resource: module.security.aws_vpc_security_group_egress_rule.alb_to_app
+	File: /modules/security/main.tf:46-53
+	Calling File: /environments/dev/main.tf:32-39
+Check: CKV_AWS_24: "Ensure no security groups allow ingress from 0.0.0.0:0 to port 22"
+	PASSED for resource: module.security.aws_security_group.app
+	File: /modules/security/main.tf:57-68
+	Calling File: /environments/dev/main.tf:32-39
+Check: CKV_AWS_25: "Ensure no security groups allow ingress from 0.0.0.0:0 to port 3389"
+	PASSED for resource: module.security.aws_security_group.app
+	File: /modules/security/main.tf:57-68
+	Calling File: /environments/dev/main.tf:32-39
+Check: CKV_AWS_23: "Ensure every security group and rule has a description"
+	PASSED for resource: module.security.aws_security_group.app
+	File: /modules/security/main.tf:57-68
+	Calling File: /environments/dev/main.tf:32-39
+Check: CKV_AWS_260: "Ensure no security groups allow ingress from 0.0.0.0:0 to port 80"
+	PASSED for resource: module.security.aws_security_group.app
+	File: /modules/security/main.tf:57-68
+	Calling File: /environments/dev/main.tf:32-39
+Check: CKV_AWS_277: "Ensure no security groups allow ingress from 0.0.0.0:0 to port -1"
+	PASSED for resource: module.security.aws_security_group.app
+	File: /modules/security/main.tf:57-68
+	Calling File: /environments/dev/main.tf:32-39
+Check: CKV_AWS_382: "Ensure no security groups allow egress from 0.0.0.0:0 to port -1"
+	PASSED for resource: module.security.aws_security_group.app
+	File: /modules/security/main.tf:57-68
+	Calling File: /environments/dev/main.tf:32-39
+Check: CKV_AWS_24: "Ensure no security groups allow ingress from 0.0.0.0:0 to port 22"
+	PASSED for resource: module.security.aws_vpc_security_group_ingress_rule.app_from_alb
+	File: /modules/security/main.tf:70-77
+	Calling File: /environments/dev/main.tf:32-39
+Check: CKV_AWS_25: "Ensure no security groups allow ingress from 0.0.0.0:0 to port 3389"
+	PASSED for resource: module.security.aws_vpc_security_group_ingress_rule.app_from_alb
+	File: /modules/security/main.tf:70-77
+	Calling File: /environments/dev/main.tf:32-39
+Check: CKV_AWS_23: "Ensure every security group and rule has a description"
+	PASSED for resource: module.security.aws_vpc_security_group_ingress_rule.app_from_alb
+	File: /modules/security/main.tf:70-77
+	Calling File: /environments/dev/main.tf:32-39
+Check: CKV_AWS_260: "Ensure no security groups allow ingress from 0.0.0.0:0 to port 80"
+	PASSED for resource: module.security.aws_vpc_security_group_ingress_rule.app_from_alb
+	File: /modules/security/main.tf:70-77
+	Calling File: /environments/dev/main.tf:32-39
+Check: CKV_AWS_277: "Ensure no security groups allow ingress from 0.0.0.0:0 to port -1"
+	PASSED for resource: module.security.aws_vpc_security_group_ingress_rule.app_from_alb
+	File: /modules/security/main.tf:70-77
+	Calling File: /environments/dev/main.tf:32-39
+Check: CKV_AWS_23: "Ensure every security group and rule has a description"
+	PASSED for resource: module.security.aws_vpc_security_group_egress_rule.app_to_db
+	File: /modules/security/main.tf:79-86
+	Calling File: /environments/dev/main.tf:32-39
+Check: CKV_AWS_382: "Ensure no security groups allow egress from 0.0.0.0:0 to port -1"
+	PASSED for resource: module.security.aws_vpc_security_group_egress_rule.app_to_db
+	File: /modules/security/main.tf:79-86
+	Calling File: /environments/dev/main.tf:32-39
+Check: CKV_AWS_23: "Ensure every security group and rule has a description"
+	PASSED for resource: module.security.aws_vpc_security_group_egress_rule.app_https_out
+	File: /modules/security/main.tf:89-96
+	Calling File: /environments/dev/main.tf:32-39
+Check: CKV_AWS_382: "Ensure no security groups allow egress from 0.0.0.0:0 to port -1"
+	PASSED for resource: module.security.aws_vpc_security_group_egress_rule.app_https_out
+	File: /modules/security/main.tf:89-96
+	Calling File: /environments/dev/main.tf:32-39
+Check: CKV_AWS_24: "Ensure no security groups allow ingress from 0.0.0.0:0 to port 22"
+	PASSED for resource: module.security.aws_security_group.db
+	File: /modules/security/main.tf:101-112
+	Calling File: /environments/dev/main.tf:32-39
+Check: CKV_AWS_25: "Ensure no security groups allow ingress from 0.0.0.0:0 to port 3389"
+	PASSED for resource: module.security.aws_security_group.db
+	File: /modules/security/main.tf:101-112
+	Calling File: /environments/dev/main.tf:32-39
+Check: CKV_AWS_23: "Ensure every security group and rule has a description"
+	PASSED for resource: module.security.aws_security_group.db
+	File: /modules/security/main.tf:101-112
+	Calling File: /environments/dev/main.tf:32-39
+Check: CKV_AWS_260: "Ensure no security groups allow ingress from 0.0.0.0:0 to port 80"
+	PASSED for resource: module.security.aws_security_group.db
+	File: /modules/security/main.tf:101-112
+	Calling File: /environments/dev/main.tf:32-39
+Check: CKV_AWS_277: "Ensure no security groups allow ingress from 0.0.0.0:0 to port -1"
+	PASSED for resource: module.security.aws_security_group.db
+	File: /modules/security/main.tf:101-112
+	Calling File: /environments/dev/main.tf:32-39
+Check: CKV_AWS_382: "Ensure no security groups allow egress from 0.0.0.0:0 to port -1"
+	PASSED for resource: module.security.aws_security_group.db
+	File: /modules/security/main.tf:101-112
+	Calling File: /environments/dev/main.tf:32-39
+Check: CKV_AWS_24: "Ensure no security groups allow ingress from 0.0.0.0:0 to port 22"
+	PASSED for resource: module.security.aws_vpc_security_group_ingress_rule.db_from_app
+	File: /modules/security/main.tf:114-121
+	Calling File: /environments/dev/main.tf:32-39
+Check: CKV_AWS_25: "Ensure no security groups allow ingress from 0.0.0.0:0 to port 3389"
+	PASSED for resource: module.security.aws_vpc_security_group_ingress_rule.db_from_app
+	File: /modules/security/main.tf:114-121
+	Calling File: /environments/dev/main.tf:32-39
+Check: CKV_AWS_23: "Ensure every security group and rule has a description"
+	PASSED for resource: module.security.aws_vpc_security_group_ingress_rule.db_from_app
+	File: /modules/security/main.tf:114-121
+	Calling File: /environments/dev/main.tf:32-39
+Check: CKV_AWS_260: "Ensure no security groups allow ingress from 0.0.0.0:0 to port 80"
+	PASSED for resource: module.security.aws_vpc_security_group_ingress_rule.db_from_app
+	File: /modules/security/main.tf:114-121
+	Calling File: /environments/dev/main.tf:32-39
+Check: CKV_AWS_277: "Ensure no security groups allow ingress from 0.0.0.0:0 to port -1"
+	PASSED for resource: module.security.aws_vpc_security_group_ingress_rule.db_from_app
+	File: /modules/security/main.tf:114-121
+	Calling File: /environments/dev/main.tf:32-39
+Check: CKV_AWS_393: "Ensure AWS GitHub Actions OIDC authorization policies only allow safe claims and claim order on IAM role"
+	PASSED for resource: module.security.aws_iam_role.app
+	File: /modules/security/main.tf:136-142
+	Calling File: /environments/dev/main.tf:32-39
+Check: CKV_AWS_61: "Ensure AWS IAM policy does not allow assume role permission across all services"
+	PASSED for resource: module.security.aws_iam_role.app
+	File: /modules/security/main.tf:136-142
+	Calling File: /environments/dev/main.tf:32-39
+Check: CKV_AWS_274: "Disallow IAM roles, users, and groups from using the AWS AdministratorAccess policy"
+	PASSED for resource: module.security.aws_iam_role.app
+	File: /modules/security/main.tf:136-142
+	Calling File: /environments/dev/main.tf:32-39
+Check: CKV_AWS_60: "Ensure IAM role allows only specific services or principals to assume it"
+	PASSED for resource: module.security.aws_iam_role.app
+	File: /modules/security/main.tf:136-142
+	Calling File: /environments/dev/main.tf:32-39
+Check: CKV_AWS_274: "Disallow IAM roles, users, and groups from using the AWS AdministratorAccess policy"
+	PASSED for resource: module.security.aws_iam_role_policy_attachment.app["CloudWatchAgentServerPolicy"]
+	File: /modules/security/main.tf:145-153
+	Calling File: /environments/dev/main.tf:32-39
+Check: CKV_AWS_274: "Disallow IAM roles, users, and groups from using the AWS AdministratorAccess policy"
+	PASSED for resource: module.security.aws_iam_role_policy_attachment.app["AmazonSSMManagedInstanceCore"]
+	File: /modules/security/main.tf:145-153
+	Calling File: /environments/dev/main.tf:32-39
+Check: CKV_AWS_49: "Ensure no IAM policies documents allow "*" as a statement's actions"
+	PASSED for resource: module.security.aws_iam_policy_document.ec2_assume
+	File: /modules/security/main.tf:125-134
+	Calling File: /environments/dev/main.tf:32-39
+Check: CKV_AWS_358: "Ensure AWS GitHub Actions OIDC authorization policies only allow safe claims and claim order"
+	PASSED for resource: module.security.aws_iam_policy_document.ec2_assume
+	File: /modules/security/main.tf:125-134
+	Calling File: /environments/dev/main.tf:32-39
+Check: CKV_AWS_111: "Ensure IAM policies does not allow write access without constraints"
+	PASSED for resource: module.security.aws_iam_policy_document.ec2_assume
+	File: /modules/security/main.tf:125-134
+	Calling File: /environments/dev/main.tf:32-39
+Check: CKV_AWS_356: "Ensure no IAM policies documents allow "*" as a statement's resource for restrictable actions"
+	PASSED for resource: module.security.aws_iam_policy_document.ec2_assume
+	File: /modules/security/main.tf:125-134
+	Calling File: /environments/dev/main.tf:32-39
+Check: CKV_AWS_283: "Ensure no IAM policies documents allow ALL or any AWS principal permissions to the resource"
+	PASSED for resource: module.security.aws_iam_policy_document.ec2_assume
+	File: /modules/security/main.tf:125-134
+	Calling File: /environments/dev/main.tf:32-39
+Check: CKV_AWS_109: "Ensure IAM policies does not allow permissions management / resource exposure without constraints"
+	PASSED for resource: module.security.aws_iam_policy_document.ec2_assume
+	File: /modules/security/main.tf:125-134
+	Calling File: /environments/dev/main.tf:32-39
+Check: CKV_AWS_1: "Ensure IAM policies that allow full "*-*" administrative privileges are not created"
+	PASSED for resource: module.security.aws_iam_policy_document.ec2_assume
+	File: /modules/security/main.tf:125-134
+	Calling File: /environments/dev/main.tf:32-39
+Check: CKV_AWS_108: "Ensure IAM policies does not allow data exfiltration"
+	PASSED for resource: module.security.aws_iam_policy_document.ec2_assume
+	File: /modules/security/main.tf:125-134
+	Calling File: /environments/dev/main.tf:32-39
+Check: CKV_AWS_110: "Ensure IAM policies does not allow privilege escalation"
+	PASSED for resource: module.security.aws_iam_policy_document.ec2_assume
+	File: /modules/security/main.tf:125-134
+	Calling File: /environments/dev/main.tf:32-39
+Check: CKV_AWS_107: "Ensure IAM policies does not allow credentials exposure"
+	PASSED for resource: module.security.aws_iam_policy_document.ec2_assume
+	File: /modules/security/main.tf:125-134
+	Calling File: /environments/dev/main.tf:32-39
+Check: CKV2_AWS_56: "Ensure AWS Managed IAMFullAccess IAM policy is not used."
+	PASSED for resource: module.networking.aws_iam_role.flow_logs
+	File: /modules/networking/main.tf:150-155
+Check: CKV2_AWS_56: "Ensure AWS Managed IAMFullAccess IAM policy is not used."
+	PASSED for resource: module.security.aws_iam_role.app
+	File: /modules/security/main.tf:136-142
+Check: CKV2_AWS_35: "AWS NAT Gateways should be utilized for the default route"
+	PASSED for resource: module.networking.aws_route_table.public
+	File: /modules/networking/main.tf:61-65
+Check: CKV2_AWS_35: "AWS NAT Gateways should be utilized for the default route"
+	PASSED for resource: module.networking.aws_route.public_internet
+	File: /modules/networking/main.tf:67-71
+Check: CKV2_AWS_35: "AWS NAT Gateways should be utilized for the default route"
+	PASSED for resource: module.networking.aws_route_table.private
+	File: /modules/networking/main.tf:80-84
+Check: CKV2_AWS_35: "AWS NAT Gateways should be utilized for the default route"
+	PASSED for resource: module.networking.aws_route.private_nat
+	File: /modules/networking/main.tf:113-119
+Check: CKV_AWS_103: "Ensure that load balancer is using at least TLS 1.2"
+	PASSED for resource: module.compute.aws_lb_listener.https[0]
+	File: /modules/compute/main.tf:88-103
+Check: CKV2_AWS_61: "Ensure that an S3 bucket has a lifecycle configuration"
+	PASSED for resource: module.monitoring.aws_s3_bucket.alb_logs
+	File: /modules/monitoring/main.tf:13-23
+Check: CKV2_AWS_19: "Ensure that all EIP addresses allocated to a VPC are attached to EC2 instances"
+	PASSED for resource: module.networking.aws_eip.nat
+	File: /modules/networking/main.tf:94-100
+Check: CKV2_AWS_44: "Ensure AWS route table with VPC peering does not contain routes overly permissive to all traffic"
+	PASSED for resource: module.networking.aws_route_table.public
+	File: /modules/networking/main.tf:61-65
+Check: CKV2_AWS_44: "Ensure AWS route table with VPC peering does not contain routes overly permissive to all traffic"
+	PASSED for resource: module.networking.aws_route.public_internet
+	File: /modules/networking/main.tf:67-71
+Check: CKV2_AWS_44: "Ensure AWS route table with VPC peering does not contain routes overly permissive to all traffic"
+	PASSED for resource: module.networking.aws_route_table.private
+	File: /modules/networking/main.tf:80-84
+Check: CKV2_AWS_44: "Ensure AWS route table with VPC peering does not contain routes overly permissive to all traffic"
+	PASSED for resource: module.networking.aws_route.private_nat
+	File: /modules/networking/main.tf:113-119
+Check: CKV2_AWS_30: "Ensure Postgres RDS as aws_db_instance has Query Logging enabled"
+	PASSED for resource: module.database.aws_db_instance.this
+	File: /modules/database/main.tf:36-73
+Check: CKV2_AWS_74: "Ensure AWS Load Balancers use strong ciphers"
+	PASSED for resource: module.compute.aws_lb_listener.http
+	File: /modules/compute/main.tf:58-86
+Check: CKV2_AWS_74: "Ensure AWS Load Balancers use strong ciphers"
+	PASSED for resource: module.compute.aws_lb_listener.https[0]
+	File: /modules/compute/main.tf:88-103
+Check: CKV2_AWS_11: "Ensure VPC flow logging is enabled in all VPCs"
+	PASSED for resource: module.networking.aws_vpc.this
+	File: /modules/networking/main.tf:15-21
+Check: CKV2_AWS_69: "Ensure AWS RDS database instance configured with encryption in transit"
+	PASSED for resource: module.database.aws_db_instance.this
+	File: /modules/database/main.tf:36-73
+Check: CKV2_AWS_60: "Ensure RDS instance with copy tags to snapshots is enabled"
+	PASSED for resource: module.database.aws_db_instance.this
+	File: /modules/database/main.tf:36-73
+Check: CKV2_AWS_76: "Ensure AWS ALB attached WAFv2 WebACL is configured with AMR for Log4j Vulnerability"
+	PASSED for resource: module.compute.aws_lb.this
+	File: /modules/compute/main.tf:14-31
+Check: CKV2_AWS_40: "Ensure AWS IAM policy does not allow full IAM privileges"
+	PASSED for resource: module.monitoring.aws_iam_policy_document.alb_logs
+	File: /modules/monitoring/main.tf:84-127
+Check: CKV2_AWS_40: "Ensure AWS IAM policy does not allow full IAM privileges"
+	PASSED for resource: module.monitoring.aws_iam_policy_document.alarms_topic
+	File: /modules/monitoring/main.tf:155-172
+Check: CKV2_AWS_40: "Ensure AWS IAM policy does not allow full IAM privileges"
+	PASSED for resource: module.networking.aws_iam_policy_document.flow_logs_assume
+	File: /modules/networking/main.tf:132-148
+Check: CKV2_AWS_40: "Ensure AWS IAM policy does not allow full IAM privileges"
+	PASSED for resource: module.networking.aws_iam_policy_document.flow_logs_write
+	File: /modules/networking/main.tf:158-167
+Check: CKV2_AWS_40: "Ensure AWS IAM policy does not allow full IAM privileges"
+	PASSED for resource: module.security.aws_iam_policy_document.ec2_assume
+	File: /modules/security/main.tf:125-134
+Check: CKV2_AWS_6: "Ensure that S3 bucket has a Public Access block"
+	PASSED for resource: module.monitoring.aws_s3_bucket.alb_logs
+	File: /modules/monitoring/main.tf:13-23
+Check: CKV_AWS_20: "S3 Bucket has an ACL defined which allows public READ access."
+	PASSED for resource: module.monitoring.aws_s3_bucket.alb_logs
+	File: /modules/monitoring/main.tf:13-23
+Check: CKV2_AWS_65: "Ensure access control lists for S3 buckets are disabled"
+	PASSED for resource: module.monitoring.aws_s3_bucket_ownership_controls.alb_logs
+	File: /modules/monitoring/main.tf:34-40
+Check: CKV_AWS_19: "Ensure all data stored in the S3 bucket is securely encrypted at rest"
+	PASSED for resource: module.monitoring.aws_s3_bucket.alb_logs
+	File: /modules/monitoring/main.tf:13-23
+Check: CKV_AWS_57: "S3 Bucket has an ACL defined which allows public WRITE access."
+	PASSED for resource: module.monitoring.aws_s3_bucket.alb_logs
+	File: /modules/monitoring/main.tf:13-23
+Check: CKV_AWS_21: "Ensure all data stored in the S3 bucket have versioning enabled"
+	PASSED for resource: module.monitoring.aws_s3_bucket.alb_logs
+	File: /modules/monitoring/main.tf:13-23
+Check: CKV2_AWS_12: "Ensure the default security group of every VPC restricts all traffic"
+	PASSED for resource: module.networking.aws_vpc.this
+	File: /modules/networking/main.tf:15-21
+Check: CKV_AWS_2: "Ensure ALB protocol is HTTPS"
+	SKIPPED for resource: module.compute.aws_lb_listener.http
+	Suppress comment: HTTP only because there is no domain or ACM certificate. Setting certificate_arn turns this listener into an HTTPS redirect.
+	File: /modules/compute/main.tf:58-86
+	Calling File: /environments/dev/main.tf:41-67
+Check: CKV_AWS_118: "Ensure that enhanced monitoring is enabled for Amazon RDS instances"
+	SKIPPED for resource: module.database.aws_db_instance.this
+	Suppress comment: Enhanced monitoring needs an extra IAM role and CloudWatch ingestion cost. Basic RDS metrics feed the CPU and storage alarms.
+	File: /modules/database/main.tf:36-73
+	Calling File: /environments/dev/main.tf:69-78
+Check: CKV_AWS_353: "Ensure that RDS instances have performance insights enabled"
+	SKIPPED for resource: module.database.aws_db_instance.this
+	Suppress comment: Performance Insights not needed for this demo. Support for the db.t4g.micro class was not verified.
+	File: /modules/database/main.tf:36-73
+	Calling File: /environments/dev/main.tf:69-78
+Check: CKV_AWS_157: "Ensure that RDS instances have Multi-AZ enabled"
+	SKIPPED for resource: module.database.aws_db_instance.this
+	Suppress comment: Single-AZ by default to avoid standby cost. The multi_az variable enables it for production.
+	File: /modules/database/main.tf:36-73
+	Calling File: /environments/dev/main.tf:69-78
+Check: CKV_AWS_158: "Ensure that CloudWatch Log Group is encrypted by KMS"
+	SKIPPED for resource: module.monitoring.aws_cloudwatch_log_group.app
+	Suppress comment: Encrypted by default with AWS-owned keys. A customer-managed KMS key adds a monthly charge in this dev design.
+	File: /modules/monitoring/main.tf:138-144
+	Calling File: /environments/dev/main.tf:83-92
+Check: CKV_AWS_338: "Ensure CloudWatch log groups retains logs for at least 1 year"
+	SKIPPED for resource: module.networking.aws_cloudwatch_log_group.flow_logs
+	Suppress comment: 30-day retention for a dev environment to limit storage cost, set by flow_log_retention_days.
+	File: /modules/networking/main.tf:123-130
+	Calling File: /environments/dev/main.tf:22-30
+Check: CKV_AWS_158: "Ensure that CloudWatch Log Group is encrypted by KMS"
+	SKIPPED for resource: module.networking.aws_cloudwatch_log_group.flow_logs
+	Suppress comment: Encrypted by default with AWS-owned keys. A customer-managed KMS key adds a monthly charge in this dev design.
+	File: /modules/networking/main.tf:123-130
+	Calling File: /environments/dev/main.tf:22-30
+Check: CKV_AWS_394: "Ensure aws_availability_zones data source pins zone identity so its result set does not silently expand when AWS adds an Availability Zone"
+	SKIPPED for resource: module.networking.aws_availability_zones.available
+	Suppress comment: Only the first az_count zones are used via slice(). Pinning zone IDs would add a region-specific variable.
+	File: /modules/networking/main.tf:4-7
+	Calling File: /environments/dev/main.tf:22-30
+Check: CKV_AWS_260: "Ensure no security groups allow ingress from 0.0.0.0:0 to port 80"
+	SKIPPED for resource: module.security.aws_vpc_security_group_ingress_rule.alb_http["0.0.0.0/0"]
+	Suppress comment: Public web entry point on the load balancer only. Restrict with allowed_ingress_cidrs for private demos.
+	File: /modules/security/main.tf:23-33
+	Calling File: /environments/dev/main.tf:32-39
+Check: CKV_AWS_103: "Ensure that load balancer is using at least TLS 1.2"
+	SKIPPED for resource: module.compute.aws_lb_listener.http
+	Suppress comment: TLS policy applies to the HTTPS listener, which uses ELBSecurityPolicy-TLS13-1-2-2021-06 when certificate_arn is set.
+	File: /modules/compute/main.tf:58-86
+Check: CKV2_AWS_5: "Ensure that Security Groups are attached to another resource"
+	SKIPPED for resource: module.security.aws_security_group.alb
+	Suppress comment: False positive. Attached to the load balancer in modules/compute (aws_lb.this security_groups) via module output.
+	File: /modules/security/main.tf:10-21
+Check: CKV2_AWS_5: "Ensure that Security Groups are attached to another resource"
+	SKIPPED for resource: module.security.aws_security_group.app
+	Suppress comment: False positive. Attached to app instances in modules/compute (aws_launch_template.app vpc_security_group_ids) via module output.
+	File: /modules/security/main.tf:57-68
+Check: CKV2_AWS_5: "Ensure that Security Groups are attached to another resource"
+	SKIPPED for resource: module.security.aws_security_group.db
+	Suppress comment: False positive. Attached to the RDS instance in modules/database (aws_db_instance.this vpc_security_group_ids) via module output.
+	File: /modules/security/main.tf:101-112
+Check: CKV2_AWS_20: "Ensure that ALB redirects HTTP requests into HTTPS ones"
+	SKIPPED for resource: module.compute.aws_lb.this
+	Suppress comment: No domain or ACM certificate in this demo. When certificate_arn is set the HTTP listener redirects to HTTPS.
+	File: /modules/compute/main.tf:14-31
+Check: CKV_AWS_145: "Ensure that S3 buckets are encrypted with KMS by default"
+	SKIPPED for resource: module.monitoring.aws_s3_bucket.alb_logs
+	Suppress comment: ALB access logs support only SSE-S3 (AES256), which is enabled. SSE-KMS is not supported for this use.
+	File: /modules/monitoring/main.tf:13-23
+Check: CKV_AWS_378: "Ensure AWS Load Balancer doesn't use HTTP protocol"
+	SKIPPED for resource: module.compute.aws_lb_target_group.app
+	Suppress comment: TLS terminates at the ALB. ALB to instance traffic stays inside the VPC on a port restricted by security group.
+	File: /modules/compute/main.tf:33-54
+Check: CKV2_AWS_62: "Ensure S3 buckets should have event notifications enabled"
+	SKIPPED for resource: module.monitoring.aws_s3_bucket.alb_logs
+	Suppress comment: No consumer for log-arrival events, so event notifications would have no target.
+	File: /modules/monitoring/main.tf:13-23
+Check: CKV_AWS_144: "Ensure that S3 bucket has cross-region replication enabled"
+	SKIPPED for resource: module.monitoring.aws_s3_bucket.alb_logs
+	Suppress comment: Cross-region replication is not justified for short-lived access logs that expire automatically.
+	File: /modules/monitoring/main.tf:13-23
+Check: CKV_AWS_18: "Ensure the S3 bucket has access logging enabled"
+	SKIPPED for resource: module.monitoring.aws_s3_bucket.alb_logs
+	Suppress comment: Access logging for the log bucket itself would require another log bucket.
+	File: /modules/monitoring/main.tf:13-23
+Check: CKV2_AWS_28: "Ensure public facing ALB are protected by WAF"
+	SKIPPED for resource: module.compute.aws_lb.this
+	Suppress comment: WAF has a monthly charge and this design is never deployed. Recommended for production.
+	File: /modules/compute/main.tf:14-31

@@ -1,0 +1,2 @@
+$ checkov -d /work --framework terraform --skip-path environments/dev/.terraform --skip-download --compact -o cli -o json --output-file-path /out   (bridgecrew/checkov:3.3.29, 2026-11-04T08:54:58Z)
+exit code: 0

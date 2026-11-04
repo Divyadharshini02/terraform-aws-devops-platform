@@ -1,0 +1,3 @@
+$ tflint --recursive --config /work/.tflint.hcl --format json   (ghcr.io/terraform-linters/tflint:v0.64.0, aws ruleset 0.49.0, 2026-11-04T08:54:38Z)
+{"issues":[],"errors":[]}
+exit code: 0

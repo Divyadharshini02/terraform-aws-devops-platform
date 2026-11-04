@@ -1,0 +1,2 @@
+$ terraform fmt -check -recursive -diff   (hashicorp/terraform:1.16.6, 2026-11-04T08:53:19Z)
+exit code: 0

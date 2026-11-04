@@ -1,0 +1,29 @@
+# Example values only. Copy to terraform.tfvars (ignored by git) to customise.
+# Never put credentials or passwords in this file.
+
+project_name = "taskapi"
+environment  = "dev"
+aws_region   = "us-east-1"
+owner        = "platform-portfolio"
+
+vpc_cidr           = "10.20.0.0/16"
+az_count           = 2
+enable_nat_gateway = false
+
+# Restrict to your own IP for a private demo, e.g. ["203.0.113.10/32"].
+allowed_ingress_cidrs = ["0.0.0.0/0"]
+certificate_arn       = null
+
+instance_type                = "t3.micro"
+app_container_image          = ""
+asg_min_size                 = 1
+asg_max_size                 = 3
+asg_desired_capacity         = 1
+target_requests_per_instance = 600
+
+db_instance_class      = "db.t4g.micro"
+db_multi_az            = false
+db_deletion_protection = true
+
+log_retention_days = 30
+alarm_email        = null

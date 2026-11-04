@@ -1,0 +1,18 @@
+# TFLint configuration (run from terraform/ with --recursive).
+# Static analysis only: deep_check is off, so TFLint never calls AWS APIs.
+
+config {
+  call_module_type = "all"
+}
+
+plugin "terraform" {
+  enabled = true
+  preset  = "recommended"
+}
+
+plugin "aws" {
+  enabled    = true
+  version    = "0.49.0"
+  source     = "github.com/terraform-linters/tflint-ruleset-aws"
+  deep_check = false
+}

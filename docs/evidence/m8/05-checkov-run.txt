@@ -1,0 +1,37 @@
+$ checkov -d /work --framework terraform --skip-path environments/dev/.terraform --skip-download --compact -o cli -o json --output-file-path /out   (bridgecrew/checkov:3.3.29, 2026-11-04T08:46:25Z)
+
+# Trimmed copy of the first Checkov run's console output (M8, before the cleanup).
+# The original console capture (17710 lines, 767612 bytes, sha1 cf1d66523b00b127fa04ce2eac718692470419cc) consisted of:
+#   - Docker image pull messages and the Checkov banner (removed here),
+#   - the CLI report, identical to checkov/results_cli.txt except for one '--- OUTPUT DELIMITER ---' line,
+#   - the JSON report, identical to checkov/results_json.json (same summary and same passed/failed/skipped checks).
+# Full results: checkov/results_cli.txt (human-readable) and checkov/results_json.json (machine-readable).
+
+terraform scan results:
+Passed checks: 173, Failed checks: 21, Skipped checks: 0
+Parsing errors: 0, Resources scanned: 57, Checkov version: 3.3.29
+
+Failed checks (21):
+  CKV2_AWS_20  module.compute.aws_lb.this
+  CKV2_AWS_28  module.compute.aws_lb.this
+  CKV2_AWS_5   module.security.aws_security_group.alb
+  CKV2_AWS_5   module.security.aws_security_group.app
+  CKV2_AWS_5   module.security.aws_security_group.db
+  CKV2_AWS_62  module.monitoring.aws_s3_bucket.alb_logs
+  CKV_AWS_103  module.compute.aws_lb_listener.http
+  CKV_AWS_118  module.database.aws_db_instance.this
+  CKV_AWS_144  module.monitoring.aws_s3_bucket.alb_logs
+  CKV_AWS_145  module.monitoring.aws_s3_bucket.alb_logs
+  CKV_AWS_157  module.database.aws_db_instance.this
+  CKV_AWS_158  module.monitoring.aws_cloudwatch_log_group.app
+  CKV_AWS_158  module.networking.aws_cloudwatch_log_group.flow_logs
+  CKV_AWS_18   module.monitoring.aws_s3_bucket.alb_logs
+  CKV_AWS_2    module.compute.aws_lb_listener.http
+  CKV_AWS_260  module.security.aws_vpc_security_group_ingress_rule.alb_http["0.0.0.0/0"]
+  CKV_AWS_338  module.networking.aws_cloudwatch_log_group.flow_logs
+  CKV_AWS_341  module.compute.aws_launch_template.app
+  CKV_AWS_353  module.database.aws_db_instance.this
+  CKV_AWS_378  module.compute.aws_lb_target_group.app
+  CKV_AWS_394  module.networking.aws_availability_zones.available
+
+exit code: 1

@@ -1,0 +1,33 @@
+$ tflint --init --config /work/.tflint.hcl   (ghcr.io/terraform-linters/tflint:v0.64.0, 2026-11-04T08:45:04Z)
+Unable to find image 'ghcr.io/terraform-linters/tflint:v0.64.0' locally
+v0.64.0: Pulling from terraform-linters/tflint
+0af7649d6533: Pulling fs layer
+d43150db85c5: Pulling fs layer
+fbfbe7109ced: Pulling fs layer
+ff635cfe206e: Download complete
+0af7649d6533: Download complete
+d43150db85c5: Download complete
+d43150db85c5: Pull complete
+fbfbe7109ced: Download complete
+fbfbe7109ced: Pull complete
+0af7649d6533: Pull complete
+Digest: sha256:1c595f42d794c32c45a6ea8b58655fd66433d4ca3b1bc631c574a48d120bd19f
+Status: Downloaded newer image for ghcr.io/terraform-linters/tflint:v0.64.0
+Installing "aws" plugin...
+Installed "aws" (source: github.com/terraform-linters/tflint-ruleset-aws, version: 0.49.0)
+exit code: 0
+
+$ tflint --version
+TFLint version 0.64.0
++ ruleset.aws (0.49.0)
++ ruleset.terraform (0.15.0-bundled)
+
+Your version of TFLint is out of date! The latest version is 0.65.0.
+You can update by downloading from https://github.com/terraform-linters/tflint/releases
+
+$ tflint --recursive --config /work/.tflint.hcl --no-color
+exit code: 0
+
+$ tflint --recursive --config /work/.tflint.hcl --format json
+{"issues":[],"errors":[]}
+exit code: 0

@@ -1,0 +1,15 @@
+$ terraform fmt -check -recursive -diff   (hashicorp/terraform:1.16.6, 2026-11-04T08:41:53Z)
+Unable to find image 'hashicorp/terraform:1.16.6' locally
+1.16.6: Pulling from hashicorp/terraform
+b6f995ab18bf: Pulling fs layer
+a6f49e207985: Pulling fs layer
+dc4f30596634: Pulling fs layer
+a6f49e207985: Download complete
+dc4f30596634: Download complete
+dc4f30596634: Pull complete
+a6f49e207985: Pull complete
+b6f995ab18bf: Download complete
+b6f995ab18bf: Pull complete
+Digest: sha256:bfffc1ded5fbf0a17beaaf22eb4793980abdb19d0761ff6a3a0efb2ab4d9b316
+Status: Downloaded newer image for hashicorp/terraform:1.16.6
+exit code: 0

@@ -1,0 +1,4 @@
+$ terraform validate -no-color   (hashicorp/terraform:1.16.6, 2026-11-04T08:43:41Z)
+Success! The configuration is valid.
+
+exit code: 0
