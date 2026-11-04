@@ -1,0 +1,2 @@
+$ docker compose --env-file .env.example --profile autoscale config --quiet   (2026-11-04T09:20:06Z)
+exit code: 0

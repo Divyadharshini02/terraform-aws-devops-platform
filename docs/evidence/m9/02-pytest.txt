@@ -1,0 +1,8 @@
+$ python -m pytest -q   (local app/.venv, Python 3.11.4, 2026-11-04T09:19:40Z)
+============================== warnings summary ===============================
+app\.venv\Lib\site-packages\fastapi\testclient.py:1
+  C:\Users\Admin\terraform-aws-devops-platform\app\.venv\Lib\site-packages\fastapi\testclient.py:1: StarletteDeprecationWarning: Using `httpx` with `starlette.testclient` is deprecated; install `httpx2` instead.
+    from starlette.testclient import TestClient as TestClient  # noqa
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+134 passed, 1 warning in 6.98s
+exit code: 0

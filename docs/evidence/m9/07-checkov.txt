@@ -1,0 +1,12 @@
+# terraform-security job, fresh copy (no .terraform), 2026-11-04T09:27:39Z
+$ checkov -d /work --framework terraform --skip-download --compact --quiet
+terraform scan results:
+
+Passed checks: 174, Failed checks: 0, Skipped checks: 20
+
+
+exit code: 0
+
+# same scan, summary only (for counts)
+terraform scan results:
+Passed checks: 174, Failed checks: 0, Skipped checks: 20

@@ -1,0 +1,23 @@
+# terraform-validate job, reproduced on a fresh copy of terraform/ (no .terraform), 2026-11-04T09:20:58Z
+
+$ terraform fmt -check -recursive -diff
+exit code: 0
+
+$ terraform init -backend=false -input=false -lockfile=readonly -no-color
+Initializing modules...
+- database in ../../modules/database
+- compute in ../../modules/compute
+- security in ../../modules/security
+- monitoring in ../../modules/monitoring
+- networking in ../../modules/networking
+Initializing provider plugins...
+- Reusing previous version of hashicorp/aws from the dependency lock file
+- Installing hashicorp/aws v6.71.0...
+- Installed hashicorp/aws v6.71.0 (signed by HashiCorp)
+Terraform has been successfully initialized!
+exit code: 0
+
+$ terraform validate -no-color
+Success! The configuration is valid.
+
+exit code: 0

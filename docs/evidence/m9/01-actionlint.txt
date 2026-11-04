@@ -1,0 +1,9 @@
+$ actionlint -no-color -verbose   (rhysd/actionlint:1.7.12@sha256:b1934ee5..., shellcheck 0.11.0, 2026-11-04T09:19:26Z)
+verbose: Linting all workflow files in repository: /repo
+verbose: Detected project: /repo
+verbose: Collected 1 YAML files
+verbose: Linting .github/workflows/ci.yml
+verbose: Using project at /repo
+verbose: Found 0 parse errors in 1 ms for .github/workflows/ci.yml
+verbose: Found total 0 errors in 277 ms for .github/workflows/ci.yml
+exit code: 0

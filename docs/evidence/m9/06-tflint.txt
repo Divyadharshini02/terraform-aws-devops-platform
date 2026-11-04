@@ -1,0 +1,9 @@
+# TFLint steps of the terraform-validate job, fresh copy + empty plugin cache, 2026-11-04T09:26:55Z
+
+$ tflint --init --config /work/.tflint.hcl
+Installing "aws" plugin...
+Installed "aws" (source: github.com/terraform-linters/tflint-ruleset-aws, version: 0.49.0)
+exit code: 0
+
+$ tflint --recursive --config /work/.tflint.hcl --format compact
+exit code: 0

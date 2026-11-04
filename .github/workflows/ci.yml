@@ -1,0 +1,151 @@
+# Continuous integration for the Terraform AWS DevOps Platform.
+#
+# Four independent jobs run in parallel on every push and pull request to main:
+#   python-tests        app + autoscaler unit tests (python -m pytest)
+#   docker-build        Compose file validation and image builds (nothing is pushed)
+#   terraform-validate  fmt, init without a backend, validate, TFLint
+#   terraform-security  Checkov static security scan
+#
+# Safety: this workflow never authenticates to AWS and never runs terraform
+# plan/apply/destroy. It uses no repository secrets. Tool images are pinned by
+# digest and actions by commit SHA (verified against the tagged releases).
+
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+# Least privilege for the automatic GITHUB_TOKEN: read the repository only.
+permissions:
+  contents: read
+
+# A newer push to the same branch or PR cancels the older, now-irrelevant run.
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  PYTHON_VERSION: "3.11"
+  TERRAFORM_IMAGE: hashicorp/terraform:1.16.6@sha256:bfffc1ded5fbf0a17beaaf22eb4793980abdb19d0761ff6a3a0efb2ab4d9b316
+  TFLINT_IMAGE: ghcr.io/terraform-linters/tflint:v0.64.0@sha256:1c595f42d794c32c45a6ea8b58655fd66433d4ca3b1bc631c574a48d120bd19f
+  CHECKOV_IMAGE: bridgecrew/checkov:3.3.29@sha256:3cc125b5337717b7303dbddd4e79374c120687b5ff6a24f9abdad56b562469f3
+
+defaults:
+  run:
+    shell: bash
+
+jobs:
+  python-tests:
+    name: Python tests
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - name: Check out code
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - name: Set up Python
+        uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+          cache: pip
+          cache-dependency-path: app/requirements.txt
+
+      - name: Install dependencies
+        run: python -m pip install -r app/requirements.txt
+
+      # pytest.ini and autoscaler/conftest.py make this run both test suites.
+      - name: Run tests
+        run: python -m pytest -q
+
+  docker-build:
+    name: Docker build
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - name: Check out code
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      # .env.example holds placeholder values only; --quiet prints nothing,
+      # so no resolved configuration ends up in the log.
+      - name: Validate Compose file (including the autoscale profile)
+        run: docker compose --env-file .env.example --profile autoscale config --quiet
+
+      - name: Build app image
+        run: docker build --tag taskapi-app:ci ./app
+
+      - name: Build autoscaler image
+        run: docker build --tag taskapi-autoscaler:ci ./autoscaler
+
+  terraform-validate:
+    name: Terraform validate and lint
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    env:
+      TF_RUN: docker run --rm -e CHECKPOINT_DISABLE=1 -e TF_IN_AUTOMATION=1 -v ${{ github.workspace }}/terraform:/work
+    steps:
+      - name: Check out code
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - name: Terraform format check
+        run: $TF_RUN -w /work "$TERRAFORM_IMAGE" fmt -check -recursive -diff
+
+      # No backend: nothing is stored remotely. -lockfile=readonly fails the job
+      # if the provider does not match .terraform.lock.hcl instead of updating it.
+      - name: Terraform init (no backend)
+        run: $TF_RUN -w /work/environments/dev "$TERRAFORM_IMAGE" init -backend=false -input=false -lockfile=readonly -no-color
+
+      - name: Terraform validate
+        run: $TF_RUN -w /work/environments/dev "$TERRAFORM_IMAGE" validate -no-color
+
+      - name: Cache TFLint plugins
+        uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+        with:
+          path: ${{ runner.temp }}/tflint-plugins
+          key: tflint-${{ runner.os }}-${{ hashFiles('terraform/.tflint.hcl') }}
+
+      # The read-only token is used only here, to avoid GitHub API rate limits
+      # when downloading the AWS ruleset. It is passed by name, never printed.
+      - name: TFLint init (download AWS ruleset)
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: |
+          mkdir -p "$RUNNER_TEMP/tflint-plugins"
+          docker run --rm -e GITHUB_TOKEN -e TFLINT_PLUGIN_DIR=/plugins \
+            -v "$RUNNER_TEMP/tflint-plugins:/plugins" \
+            -v "$GITHUB_WORKSPACE/terraform:/work" -w /work \
+            "$TFLINT_IMAGE" --init --config /work/.tflint.hcl
+
+      - name: TFLint
+        run: |
+          docker run --rm -e TFLINT_PLUGIN_DIR=/plugins \
+            -v "$RUNNER_TEMP/tflint-plugins:/plugins" \
+            -v "$GITHUB_WORKSPACE/terraform:/work" -w /work \
+            "$TFLINT_IMAGE" --recursive --config /work/.tflint.hcl --format compact
+
+  terraform-security:
+    name: Terraform security scan
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - name: Check out code
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      # Fails on any failed check. Accepted findings are skipped inline in the
+      # Terraform code with a written reason (#checkov:skip=<ID>:<reason>).
+      # --skip-download: no calls to the Prisma Cloud platform, no API key.
+      - name: Checkov
+        run: |
+          docker run --rm -v "$GITHUB_WORKSPACE/terraform:/work:ro" \
+            "$CHECKOV_IMAGE" -d /work --framework terraform --skip-download --compact --quiet
