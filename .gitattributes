@@ -1,0 +1,16 @@
+# Store text files with LF line endings in the repository, so CI (Linux) and
+# every clone see the same content. Windows checkouts still get CRLF through
+# core.autocrlf; nothing in the working tree is rewritten by this file.
+* text=auto
+
+# Scripts executed on Linux must always be LF, on every platform.
+*.sh    text eol=lf
+*.tftpl text eol=lf
+
+# Binary files: never convert or diff as text.
+*.png binary
+*.jpg binary
+
+# Raw tool output kept exactly as printed (e.g. k6 adds trailing spaces):
+# skip whitespace checks such as "git diff --check" for these files.
+docs/evidence/**/*.txt -whitespace
