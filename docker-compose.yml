@@ -59,5 +59,28 @@ services:
     depends_on:
       - prometheus
 
+  # M7: local autoscaling controller. Opt-in only:
+  #   docker compose --profile autoscale up -d --build --no-deps autoscaler
+  # Always name the service and use --no-deps, otherwise Compose also
+  # resets "app" to 1 replica. Runs in DRY_RUN mode unless
+  # AUTOSCALER_DRY_RUN=false is set explicitly.
+  autoscaler:
+    build: ./autoscaler
+    profiles: ["autoscale"]
+    environment:
+      AUTOSCALER_DRY_RUN: ${AUTOSCALER_DRY_RUN:-true}
+      AUTOSCALER_PROMETHEUS_URL: http://prometheus:9090
+    volumes:
+      # Docker Engine API via the local Unix socket (never TCP). This grants
+      # control of the Docker host: see docs for the security trade-off.
+      - /var/run/docker.sock:/var/run/docker.sock
+    depends_on:
+      - prometheus
+    read_only: true
+    security_opt:
+      - no-new-privileges:true
+    cap_drop:
+      - ALL
+
 volumes:
   pgdata:
