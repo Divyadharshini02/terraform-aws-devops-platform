@@ -66,7 +66,7 @@ Every result quoted below comes from the evidence files in [`docs/evidence/`](do
 | Load testing | k6 scenario (create → read → delete) with latency and error thresholds | Measured (M6, M7) |
 | Autoscaling | Python controller scaling app replicas 1–3 through the Docker API, driven by Prometheus | Live-validated (M7) |
 | Infrastructure as Code | Five Terraform modules for an AWS design (VPC, ALB, Auto Scaling, RDS, CloudWatch, S3) | **Validation only — not deployed** |
-| CI | GitHub Actions: tests, image builds, Terraform validate/lint, Checkov | Verified locally; **first GitHub run pending** |
+| CI | GitHub Actions: tests, image builds, Terraform validate/lint, Checkov | Verified locally; **first GitHub run was sucessfull** |
 
 ## Architecture
 
@@ -479,7 +479,7 @@ have no separate evidence reports.
   tuning the test until it passed.
 - **Honest measurement.** Single runs on shared hardware are reported as observations with their
   caveats, not as proof that more replicas are always faster.
-- **Infrastructure as Code without spending.** The AWS design is validated with fmt, validate,
+- **Infrastructure as Code without swas sucessfull.** The AWS design is validated with fmt, validate,
   TFLint and Checkov in pinned containers that have no access to credentials; every Checkov
   finding was fixed, verified as a false positive, or skipped with a written reason.
 - **Supply-chain-aware CI.** Actions pinned by verified commit SHA, tool images by digest,
