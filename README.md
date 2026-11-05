@@ -415,8 +415,10 @@ authentication, actions pinned to verified commit SHAs, tool images pinned to ve
 and the built-in read-only token exposed to a single step (TFLint plugin download).
 
 **Status:** every job was reproduced locally on a fresh copy of the repository and the workflow
-passed `actionlint` with 0 errors ([M9 report](docs/evidence/m9/m9-report.md)). **The first run on
-GitHub Actions is still pending** — the repository has not yet been pushed.
+passed `actionlint` with 0 errors ([M9 report](docs/evidence/m9/m9-report.md)).
+
+**CI Status:** The first GitHub Actions CI run completed successfully. All four jobs passed: Python tests, Docker build, Terraform validate and lint, and Terraform security scan.
+
 
 ## Security practices and limitations
 
